@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# copy scripts from gentoo repo at $1 to $2, assuming gpy-upgrade-impl
+# has been applied to $1 (i.e. `git diff` has PYTHON_COMPAT updates)
+
+set -e
+
+main() {
+	if [[ ${#} -ne 2 ]]; then
+		echo "Usage: ${0} <gentoo-repo-path> <new-repo-path>"
+		exit 1
+	fi
+
+	local src=${1}
+	local dst=${2}
+
+	local files=(
+		$(
+			cd "${src}" &&
+			git diff --name-only |
+			xargs git grep -l "\(^distutils_enable_tests\|python_test()\)" |
+			xargs git grep -E -L "^RESTRICT\+?=['\"]\s*test[^?]"
+		)
+	)
+	local dirs=( $(printf "%s\n" "${files[@]}" | cut -d/ -f1-2 | uniq) )
+
+	local x f
+	for x in "${dirs[@]}"; do
+		mkdir -p "${dst}/${x}"
+		for f in Manifest metadata.xml files; do
+			if [[ -e ${src}/${x}/${f} ]]; then
+				cp -r "${src}/${x}/${f}" "${dst}/${x}"
+			fi
+		done
+	done
+	for x in "${files[@]}"; do
+		cp "${src}/${x}" "${dst}/${x}"
+	done
+	for x in "${dirs[@]}"; do
+		( cd "${dst}/${x}" && pkgdev manifest )
+	done
+}
+
+main "${@}"
