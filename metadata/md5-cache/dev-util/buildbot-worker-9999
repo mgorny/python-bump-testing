@@ -1,0 +1,15 @@
+BDEPEND=>=dev-python/msgpack-0.6.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] test? ( acct-user/buildbot >=dev-python/autobahn-0.16.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] >=dev-python/twisted-18.7.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] dev-python/future[python_targets_python3_10(-)?,python_targets_python3_11(-)?] !<dev-util/buildbot-1.0.0 dev-python/mock[python_targets_python3_10(-)?,python_targets_python3_11(-)?] dev-python/parameterized[python_targets_python3_10(-)?,python_targets_python3_11(-)?] dev-python/psutil[python_targets_python3_10(-)?,python_targets_python3_11(-)?] ) >=dev-vcs/git-1.8.2.1[curl] python_targets_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 ) >=dev-python/gpep517-13[python_targets_python3_10(-)?,python_targets_python3_11(-)?] || ( >=dev-python/setuptools-67.2.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] <dev-python/setuptools-65.7.1[python_targets_python3_10(-)?,python_targets_python3_11(-)?] ) >=dev-python/wheel-0.38.4[python_targets_python3_10(-)?,python_targets_python3_11(-)?]
+DEFINED_PHASES=compile config configure install postinst prepare test unpack
+DESCRIPTION=BuildBot Worker (slave) Daemon
+EAPI=8
+HOMEPAGE=https://buildbot.net/ https://github.com/buildbot/buildbot https://pypi.org/project/buildbot-worker/
+INHERIT=readme.gentoo-r1 git-r3 distutils-r1
+IUSE=test python_targets_python3_10 python_targets_python3_11
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=acct-user/buildbot >=dev-python/autobahn-0.16.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] >=dev-python/twisted-18.7.0[python_targets_python3_10(-)?,python_targets_python3_11(-)?] dev-python/future[python_targets_python3_10(-)?,python_targets_python3_11(-)?] !<dev-util/buildbot-1.0.0 python_targets_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 )
+REQUIRED_USE=|| ( python_targets_python3_10 python_targets_python3_11 )
+RESTRICT=!test? ( test )
+SLOT=0
+_eclasses_=readme.gentoo-r1	b776ad4b42f564c406a95c41ccb42c55	git-r3	2347f8fe2d392b2a091191f94be37e6f	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	multilib	5ca4e49abed8e3a2f7b56920eadee157	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	38c85b725d0467e51954ea921b6c104b	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-r1	666be58f658d6b32affe30f80e39a49e	distutils-r1	b69cca67d4bf504984c07366f8d3cac4
+_md5_=6fcf774a87f31082d3af8db739bbd736
